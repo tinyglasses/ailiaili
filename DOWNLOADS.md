@@ -1,18 +1,20 @@
 # 按用途下载
 
-[直接打开 AiliAili](https://tinyglasses.github.io/ailiaili/) · [v0.1.0 全部下载](https://github.com/tinyglasses/ailiaili/releases/tag/v0.1.0) · [源码仓库](https://github.com/tinyglasses/ailiaili)
+[直接打开 AiliAili](https://tinyglasses.github.io/ailiaili/) · [v0.1.1 全部下载](https://github.com/tinyglasses/ailiaili/releases/tag/v0.1.1) · [源码仓库](https://github.com/tinyglasses/ailiaili)
 
 只想浏览时，打开在线网站即可，无需安装或运行本地服务。想发布自己的版本，可按[GitHub Pages部署指南](docs/PUBLISH.md)操作。
 
 | 目的 | 获取什么 | 不必下载 |
 | --- | --- | --- |
-| 只逛这次实验的世界 | [在线站](https://tinyglasses.github.io/ailiaili/)，或 [ailiaili-web.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.0/ailiaili-web.zip) | Python依赖、原PNG、模拟数据库 |
-| 在自己电脑运行或修改模拟器 | 仓库ZIP或 [ailiaili-source.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.0/ailiaili-source.zip) | 所有封面包 |
-| 研究已经发生的作品与指标 | [ailiaili-data.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.0/ailiaili-data.zip)，含数据、数据字典和标准库示例 | 图片、模型服务、实验状态数据库 |
-| 只阅读UP主、找写作灵感 | GitHub里的 [inspiration/](inspiration/README.md)，或 [ailiaili-inspiration.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.0/ailiaili-inspiration.zip) | 网站、Python、图片 |
+| 只逛这次实验的世界 | [在线站](https://tinyglasses.github.io/ailiaili/)，或 [ailiaili-web.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.1/ailiaili-web.zip) | Python依赖、原PNG、模拟数据库 |
+| 在自己电脑运行或修改模拟器 | 仓库ZIP或 [ailiaili-source.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.1/ailiaili-source.zip) | 所有封面包 |
+| 研究已经发生的作品与指标 | [ailiaili-data.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.1/ailiaili-data.zip)，含数据、数据字典和标准库示例 | 图片、模型服务、实验状态数据库 |
+| 只阅读UP主、找写作灵感 | GitHub里的 [inspiration/](inspiration/README.md)，或 [ailiaili-inspiration.zip](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.1/ailiaili-inspiration.zip) | 网站、Python、图片 |
 | 使用原图拍摄或重建网页图片 | `ailiaili-covers-*.zip`，共约4.53 GB | 只看网站时无需这些包 |
 
-所有附件对应同一发布世界。[SHA256SUMS.txt](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.0/SHA256SUMS.txt)提供下载校验值；五个可选原图分包可在[Release 附件列表](https://github.com/tinyglasses/ailiaili/releases/tag/v0.1.0)获取。
+所有附件对应同一发布世界。[SHA256SUMS.txt](https://github.com/tinyglasses/ailiaili/releases/download/v0.1.1/SHA256SUMS.txt)提供下载校验值；五个可选原图分包可在[Release 附件列表](https://github.com/tinyglasses/ailiaili/releases/tag/v0.1.1)获取。
+
+所有 ZIP 均附带 `RIGHTS.md`、MIT 与 CC BY 4.0 许可文件。代码与内容分别适用其许可，均允许商用；具体署名方式见[授权说明](RIGHTS.md)。旧 v0.1.0 附件中属于本项目的材料也获得同样授权，已有图片无需重新下载。
 
 ## 网页包
 

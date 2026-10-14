@@ -4,9 +4,10 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ailiaili"
-version = "0.1.0"
+version = "0.1.1"
 description = "Entertainment-first AI creator ecology simulation"
 readme = "README.md"
+license = {file = "LICENSE"}
 requires-python = ">=3.12"
 dependencies = [
   "httpx>=0.28,<1",

@@ -5,6 +5,7 @@ p=argparse.ArgumentParser();p.add_argument('archive_dir',type=Path);a=p.parse_ar
 root=Path(__file__).resolve().parents[1]
 entries=json.loads((root/'data/covers.json').read_text(encoding='utf8'))['covers']
 allowed={('ailiaili/site/'+r['path']):r for r in entries}
+notices={'ailiaili/LICENSE','ailiaili/LICENSE-CONTENT','ailiaili/RIGHTS.md'}
 archives=sorted(a.archive_dir.glob('ailiaili-covers-*.zip'))
 if not archives:raise SystemExit('No ailiaili-covers-*.zip files found')
 count=0
@@ -12,6 +13,7 @@ for archive in archives:
     with zipfile.ZipFile(archive) as z:
         for member in z.infolist():
             if member.is_dir():continue
+            if member.filename in notices:continue
             if member.filename not in allowed:raise SystemExit('Unexpected archive entry')
             info=allowed[member.filename]
             if member.file_size!=info['bytes']:raise SystemExit('Unexpected file size')

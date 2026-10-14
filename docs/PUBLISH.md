@@ -27,7 +27,7 @@ GitHub Pages托管本项目的静态网页。发布后，观众打开公开网�
 
 ```console
 cd dist/site
-python -m zipfile -c ../ailiaili-web.zip index.html .nojekyll browse-core.js explore.js explore.css recommendation-core.js recommendation-data.js recommendation-ui.js cover-derivatives.json assets
+python -m zipfile -c ../ailiaili-web.zip index.html .nojekyll browse-core.js explore.js explore.css recommendation-core.js recommendation-data.js recommendation-ui.js cover-derivatives.json LICENSE LICENSE-CONTENT RIGHTS.md assets
 cd ..
 ```
 
@@ -58,4 +58,4 @@ python tools/serve.py --directory dist/pages --port 8770
 
 这套部署不依赖自购服务器。代码测试工作流会在提交/PR时运行无模型测试；Pages发布工作流仅在手动触发时运行。Actions用量与仓库计划有关，详见[GitHub Pages自定义工作流说明](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)。
 
-公开浏览和允许别人改编、再分发是不同安排；项目的代码、数据与图片授权状态见[RIGHTS.md](../RIGHTS.md)。
+公开浏览和允许别人改编、再分发是不同安排；本项目代码、数据与图片均允许按相应许可商用，署名方式见[RIGHTS.md](../RIGHTS.md)。

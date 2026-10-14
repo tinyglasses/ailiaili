@@ -152,6 +152,8 @@ def main() -> None:
                                   'elapsed_seconds': round(time.monotonic() - started)}), flush=True)
     rows.sort(key=lambda r: r['video_id'])
     summary = build_html(source / 'site/index.html', output, rows, data)
+    for notice in ('LICENSE', 'LICENSE-CONTENT', 'RIGHTS.md'):
+        shutil.copyfile(source / notice, output / notice)
     (output / '.nojekyll').write_text('', encoding='utf-8')
     provenance = {'schema': 'ailiaili-web-derivatives-v1',
                   'notice': 'AI-generated covers. Web variants are resized derivatives; original PNGs and original provenance remain in the separate source release. XMP is a declaration, not a new cryptographic signature.',

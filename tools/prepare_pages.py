@@ -19,6 +19,8 @@ ROOT_FILES = {
     'cover-derivatives.json',
 }
 REQUIRED_FILES = ROOT_FILES - {'cover-derivatives.json'}
+# Keep older release archives deployable; new builds carry their notices.
+ROOT_FILES |= {'LICENSE', 'LICENSE-CONTENT', 'RIGHTS.md'}
 IMAGE_PATH = re.compile(r'assets/(640|1280)/video_creator_[0-9]{3}_d[0-9]{3}_[0-9]{2}\.webp')
 
 

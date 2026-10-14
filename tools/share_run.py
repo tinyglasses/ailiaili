@@ -33,7 +33,8 @@ def share_run(run_dir: Path, output: Path) -> dict:
         '自己的新作品如何授权由分享者说明；随包模板的许可状态见[RIGHTS](reading/RIGHTS.md)。\n',
         encoding='utf-8')
     files = sorted(p for p in output.rglob('*') if p.is_file())
-    allowed = {'README.md', 'data/README.md', 'data/world.json', 'data/daily_metrics.csv'}
+    allowed = {'README.md', 'data/README.md', 'data/world.json', 'data/daily_metrics.csv',
+               'reading/LICENSE', 'reading/LICENSE-CONTENT'}
     for path in files:
         relative = path.relative_to(output).as_posix()
         if relative not in allowed and not (relative.startswith('reading/') and relative.endswith('.md')):

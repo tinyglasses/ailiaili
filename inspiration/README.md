@@ -6,7 +6,7 @@
 
 这是 AI 内容社区的模拟档案，人物不是现实 UP 主。作品为模拟中生成的标题、简介与内容大纲，不能当作真实执行记录或已经完成的视频。
 
-角色设定、账号声明及作品文字均来自输入数据 `data/world.json`；模型名称仅说明当次记录来源。正式世界的数据口径见完整项目中的 `docs/DATA.md`。[许可待定／使用边界](../RIGHTS.md)。
+角色设定、账号声明及作品文字均来自输入数据 `data/world.json`；模型名称仅说明当次记录来源。正式世界的数据口径见完整项目中的 `docs/DATA.md`。[授权与署名](../RIGHTS.md)。
 
 本次输入世界：`ailiaili-formal-v1.2-100c-60d`。
 
@@ -222,4 +222,4 @@ python tools/export_inspiration.py --creator creator_038 --include-outlines --ou
 
 这些命令需要完整项目中的脚本和数据；独立灵感包只负责阅读，无需执行。可重复传入 `--creator` 选择多个账号。导出不需要 API Key；它不会调用模型，也不会改动正式世界。
 
-[项目／灵感包首页](../README.md) · [许可状态](../RIGHTS.md)
+[项目／灵感包首页](../README.md) · [授权与署名](../RIGHTS.md)

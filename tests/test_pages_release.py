@@ -44,6 +44,14 @@ def test_bad_checksum_never_creates_output(tmp_path):
     assert not (tmp_path / 'public').exists()
 
 
+@pytest.mark.parametrize('name', ['LICENSE', 'LICENSE-CONTENT', 'RIGHTS.md'])
+def test_release_notices_are_preserved(tmp_path, name):
+    path, sums = make_package(tmp_path, (name, 'Public license notice'))
+    output = tmp_path / 'public'
+    pages.prepare_pages(path, sums, output)
+    assert (output / name).read_text() == 'Public license notice'
+
+
 @pytest.mark.parametrize('name', ['../private.txt', 'assets/../.env', 'runs/world.db', '.git/config', 'assets/private.json'])
 def test_non_public_paths_rejected_before_writing(tmp_path, name):
     path, sums = make_package(tmp_path, (name, 'private'))

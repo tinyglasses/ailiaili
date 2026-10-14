@@ -86,7 +86,7 @@ def source_note(document: Path, source_label: str, output: Path) -> list[str]:
         "",
         "角色设定、账号声明及作品文字均来自输入数据 `" + literal(source_label)
         + "`；模型名称仅说明当次记录来源。正式世界的数据口径见完整项目中的 `docs/DATA.md`。"
-        + link("许可待定／使用边界", rights_path(output), document) + "。",
+        + link("授权与署名", rights_path(output), document) + "。",
         "",
     ]
 
@@ -209,7 +209,7 @@ def write_index(output: Path, creators: list[dict], by_creator: dict, total: int
               "只导出指定账号，并附上它的每篇完整大纲：", "", "```console", "python tools/export_inspiration.py --creator creator_038 --include-outlines --output exports/npc-reading", "```", "",
               "这些命令需要完整项目中的脚本和数据；独立灵感包只负责阅读，无需执行。可重复传入 `--creator` 选择多个账号。导出不需要 API Key；它不会调用模型，也不会改动正式世界。", "",
               link("项目／灵感包首页", ROOT / "README.md" if output == DEFAULT_OUTPUT else output / "README.md", document)
-              + " · " + link("许可状态", rights_path(output), document), ""]
+              + " · " + link("授权与署名", rights_path(output), document), ""]
     document.write_text("\n".join(lines), encoding="utf-8")
 
 
@@ -246,7 +246,8 @@ def export_inspiration(world: Path, output: Path, *, creator_ids: list[str] | No
     if output != DEFAULT_OUTPUT:
         # A selected or reader-created archive can be moved on its own: no links
         # back to the author's checkout are required merely to read the result.
-        (output / "RIGHTS.md").write_text((ROOT / "RIGHTS.md").read_text(encoding="utf-8"), encoding="utf-8")
+        for notice in ("RIGHTS.md", "LICENSE", "LICENSE-CONTENT"):
+            (output / notice).write_bytes((ROOT / notice).read_bytes())
         template = (DEFAULT_OUTPUT / "TEMPLATE.md").read_text(encoding="utf-8")
         template = template.replace("](../RIGHTS.md)", "](RIGHTS.md)")
         template = template.replace("[100 个账号档案]", "[这些账号档案]")
