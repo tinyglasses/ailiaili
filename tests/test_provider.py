@@ -53,7 +53,8 @@ def test_openrouter_promotes_embedded_503_to_retryable_provider_error(
     assert "Overloaded" in str(captured.value)
 
 
-def test_request_start_pacer_smooths_a_concurrent_burst() -> None:
+def test_request_start_pacer_smooths_a_concurrent_burst(monkeypatch) -> None:
+    monkeypatch.setenv("OPENROUTER_API_KEY", "temporary-test-key")
     starts: list[float] = []
     lock = threading.Lock()
 
@@ -111,7 +112,8 @@ def test_request_start_pacer_smooths_a_concurrent_burst() -> None:
     assert all(right - left >= 0.015 for left, right in zip(ordered, ordered[1:]))
 
 
-def test_request_start_pacer_releases_small_batches() -> None:
+def test_request_start_pacer_releases_small_batches(monkeypatch) -> None:
+    monkeypatch.setenv("OPENROUTER_API_KEY", "temporary-test-key")
     starts: list[float] = []
     lock = threading.Lock()
 
@@ -168,7 +170,8 @@ def test_request_start_pacer_releases_small_batches() -> None:
     assert provider.network_peak_in_flight >= 1
 
 
-def test_model_specific_pacer_does_not_delay_another_model() -> None:
+def test_model_specific_pacer_does_not_delay_another_model(monkeypatch) -> None:
+    monkeypatch.setenv("OPENROUTER_API_KEY", "temporary-test-key")
     starts: list[tuple[str, float]] = []
     lock = threading.Lock()
 

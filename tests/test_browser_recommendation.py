@@ -82,3 +82,23 @@ def test_exported_browser_counts_match_public_inputs():
     actual = (ROOT / 'site/recommendation-data.js').read_text(encoding='utf-8')
     actual = json.loads(actual.split('globalThis.AiliAiliRecommendationData=', 1)[1].strip().removesuffix(';'))
     assert actual == builder.build(ROOT)
+
+
+def test_browser_revision_ignores_checkout_line_endings_but_tracks_content(tmp_path):
+    spec = importlib.util.spec_from_file_location('recommendation_export', ROOT / 'tools/build_recommendation_data.py')
+    builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(builder)
+    paths = ['data/world.json', 'data/daily_metrics.csv', 'configs/reference/world.yaml']
+    for relative in paths:
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes((ROOT / relative).read_text(encoding='utf-8').encode('utf-8'))
+    lf = builder.build(tmp_path)
+    for relative in paths:
+        target = tmp_path / relative
+        target.write_bytes(target.read_bytes().replace(b'\n', b'\r\n'))
+    assert builder.build(tmp_path) == lf
+    config = tmp_path / 'configs/reference/world.yaml'
+    with config.open('ab') as stream:
+        stream.write(b'\r\n# Changed source content\r\n')
+    assert builder.build(tmp_path)['revision'] != lf['revision']

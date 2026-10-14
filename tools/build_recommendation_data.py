@@ -23,6 +23,11 @@ CONFIG_KEYS = (
 )
 
 
+def text_sha256(path: Path) -> str:
+    """Keep text source fingerprints stable across Git checkout line endings."""
+    return hashlib.sha256(path.read_text(encoding='utf-8').encode('utf-8')).hexdigest()
+
+
 def build(root: Path) -> dict:
     world = json.loads((root / 'data/world.json').read_text(encoding='utf-8'))
     works = world['community']['catalog']['works']
@@ -55,9 +60,10 @@ def build(root: Path) -> dict:
                   for key, days in totals.items()},
         'sources': {
             'metrics': 'data/daily_metrics.csv',
-            'metrics_sha256': hashlib.sha256(metrics_path.read_bytes()).hexdigest(),
+            'metrics_sha256': text_sha256(metrics_path),
             'config': 'configs/reference/world.yaml',
-            'config_sha256': hashlib.sha256(config_path.read_bytes()).hexdigest(),
+            'config_sha256': text_sha256(config_path),
+            'text_hash_format': 'utf8-lf-v1',
             'rule_implementation': 'src/ailiaili/recommendation.py',
         },
     }
