@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import threading
-import time
 from collections.abc import Sequence
 from concurrent.futures import ThreadPoolExecutor
 from decimal import Decimal
@@ -45,21 +44,30 @@ class FakeProvider:
 
 
 class ConcurrentFakeProvider:
-    def __init__(self, *, delay_seconds: float = 0.2) -> None:
-        self.delay_seconds = delay_seconds
+    def __init__(self, *, minimum_active: int = 17) -> None:
+        self.minimum_active = minimum_active
         self.calls = 0
         self.active = 0
         self.max_active = 0
         self._lock = threading.Lock()
+        self._overlap = threading.Event()
 
     def complete(self, **_: Any) -> ProviderResult:
         with self._lock:
             self.calls += 1
             self.active += 1
             self.max_active = max(self.max_active, self.active)
-        time.sleep(self.delay_seconds)
-        with self._lock:
-            self.active -= 1
+            if self.active >= self.minimum_active:
+                self._overlap.set()
+        try:
+            # Prove overlap without depending on how many durable dispatches
+            # a CI runner can start during an arbitrary 200 ms sleep.
+            if not self._overlap.wait(timeout=15):
+                self._overlap.set()  # Release other workers on failure.
+                raise AssertionError('Gateway did not admit the required concurrent calls')
+        finally:
+            with self._lock:
+                self.active -= 1
         return result(
             '{"ok":true,"message":"parallel"}',
             reported_cost="0.000001",
