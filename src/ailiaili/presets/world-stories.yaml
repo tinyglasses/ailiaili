@@ -1,0 +1,43 @@
+run_id: my-world
+mode: stub
+days: 5
+seed: 42
+categories:
+- 怪谈
+- 日常史诗
+creators:
+- name: 夜班便利店
+  category: 怪谈
+  personality: 一本正经，胆子很小，遇到怪事先看劳动合同
+  goal: 把便利店值夜班写成有生活气的怪谈
+  topics:
+  - 夜班冰柜自己加班
+  - 收银台后面的陌生工牌
+  approach: storyteller
+- name: 洗衣房史官
+  category: 日常史诗
+  personality: 庄严认真，擅长把普通小事讲得惊天动地
+  goal: 把洗衣做饭这些小事写成英雄故事
+  topics:
+  - 找回失踪的袜子
+  - 最后一件没晾干的衬衫
+  approach: storyteller
+viewers:
+  count: 6
+  interests:
+  - 怪谈
+  - 日常史诗
+  personality: 喜欢有画面的小故事，讨厌反复说教
+publish_every: 2
+model: main
+models:
+  main:
+    provider: openrouter
+    model_id: REPLACE_WITH_MODEL_ID
+    api_key_env: AILIAILI_MODEL_API_KEY
+    input_per_million: null
+    output_per_million: null
+budget:
+  hard_limit: 0.1
+  max_cost_per_call: 0.02
+question: 两种说话方式，怎样把日常小事写成故事？

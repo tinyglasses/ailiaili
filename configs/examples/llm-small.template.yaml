@@ -1,0 +1,28 @@
+# Requires a completed llm-runtime.template.yaml and your own credentials.
+# This starts a NEW small world; it does not resume the published world.
+run_id: llm-small
+seed: 20260925
+world_anchor_date: '2026-01-01'
+days: 1
+execution_mode: llm
+creator_count: 2
+viewer_count: 4
+homepage_size: 2
+# Must match the maximum click_cap in configs/reference/viewers.yaml.
+max_clicks: 3
+publish_interval_days: 3
+initial_videos_per_creator: 1
+cold_impression_target: 10
+exploit_ratio: 0.5
+cold_ratio: 0.0
+explore_ratio: 0.5
+max_videos_per_creator: 1
+creator_persona_path: configs/reference/creators.yaml
+viewer_persona_path: configs/reference/viewers.yaml
+llm_runtime_path: configs/examples/llm-runtime.template.yaml
+creator_model_aliases: [my_model]
+viewer_model_aliases: [my_model]
+max_concurrency: 1
+request_start_interval_ms: 1000
+request_start_batch_size: 1
+output_root: runs

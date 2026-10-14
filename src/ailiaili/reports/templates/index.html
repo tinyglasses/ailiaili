@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>AiliAili · {{ run_id }}</title>
+  <style>
+    :root {
+      --pink:#fb7299; --pink-strong:#f25d8e; --blue:#00aeec; --blue-dark:#008ac5;
+      --ink:#18191c; --muted:#61666d; --soft:#9499a0; --line:#e3e5e7; --wash:#f6f7f8;
+      --night:#090b12; --night-2:#111521; --night-3:#191e2d; --night-line:#2b3245;
+      --lab-ink:#f5f7fb; --lab-muted:#9aa5ba; --gold:#f6c45b;
+      --shadow:0 18px 50px rgba(23,26,35,.10);
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:#fff; font:14px/1.5 Inter,"PingFang SC","Microsoft YaHei",system-ui,sans-serif; }
+    button,select,input { font:inherit; }
+    button { color:inherit; }
+    [hidden] { display:none !important; }
+    .topbar { height:64px; position:sticky; top:0; z-index:50; display:flex; align-items:center; gap:26px; padding:0 max(28px,calc((100vw - 1440px)/2)); background:rgba(255,255,255,.92); border-bottom:1px solid rgba(227,229,231,.9); backdrop-filter:blur(18px); }
+    .logo { display:flex; align-items:center; gap:10px; min-width:max-content; font-weight:900; font-size:22px; letter-spacing:-1px; }
+    .logo-mark { width:35px; height:30px; display:grid; place-items:center; border:2px solid var(--pink); border-radius:9px; color:var(--pink); font-size:12px; letter-spacing:0; transform:rotate(-2deg); }
+    .logo em { color:var(--pink); font-style:normal; }
+    .main-nav { display:flex; align-items:center; gap:22px; color:#303238; }
+    .main-nav span { white-space:nowrap; }
+    .view-tabs { margin-left:auto; display:flex; gap:4px; padding:4px; border-radius:12px; background:var(--wash); }
+    .view-tab { border:0; border-radius:9px; background:transparent; padding:7px 14px; cursor:pointer; color:var(--muted); }
+    .view-tab.active { color:#fff; background:var(--ink); box-shadow:0 4px 14px rgba(0,0,0,.15); }
+    .global-day { min-width:max-content; padding-left:12px; color:var(--muted); font-variant-numeric:tabular-nums; }
+    .global-day strong { color:var(--ink); }
+    .world-view { min-height:calc(100vh - 64px); }
+
+    /* Public world: familiar content-community grammar, without copying assets. */
+    .home-shell { background:#fff; padding-bottom:80px; }
+    .home-hero { position:relative; height:210px; overflow:hidden; color:#fff; background:
+      radial-gradient(circle at 74% 28%,rgba(255,255,255,.28) 0 3%,transparent 3.3%),
+      linear-gradient(115deg,#55c7ec 0%,#86d4ec 31%,#c9a8db 63%,#fb9aae 100%); }
+    .home-hero::before,.home-hero::after { content:""; position:absolute; border:1px solid rgba(255,255,255,.35); border-radius:50%; }
+    .home-hero::before { width:330px; height:330px; right:8%; top:-190px; }
+    .home-hero::after { width:180px; height:180px; left:9%; bottom:-128px; }
+    .hero-grid { position:absolute; inset:0; opacity:.15; background-image:linear-gradient(rgba(255,255,255,.35) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.35) 1px,transparent 1px); background-size:42px 42px; mask-image:linear-gradient(90deg,transparent,#000,transparent); }
+    .hero-inner { width:min(1380px,calc(100% - 48px)); height:100%; margin:auto; position:relative; display:flex; align-items:flex-end; justify-content:space-between; padding:0 0 28px; }
+    .hero-copy { position:relative; z-index:2; text-shadow:0 2px 14px rgba(20,50,90,.2); }
+    .hero-copy small { display:block; font-weight:700; letter-spacing:.16em; opacity:.85; }
+    .hero-copy h1 { margin:5px 0 2px; font-size:44px; line-height:1; letter-spacing:-2px; }
+    .hero-copy p { margin:8px 0 0; font-size:15px; opacity:.9; }
+    .hero-day-art { position:relative; z-index:2; display:flex; align-items:baseline; gap:10px; font-weight:900; }
+    .hero-day-art b { font-size:76px; line-height:.8; letter-spacing:-5px; }
+    .hero-day-art span { font-size:18px; }
+    .public-wrap { width:min(1380px,calc(100% - 48px)); margin:0 auto; }
+    .channel-row { display:flex; align-items:center; gap:18px; padding:22px 0 18px; border-bottom:1px solid var(--line); }
+    .channel-orb { width:46px; height:46px; flex:0 0 auto; display:grid; place-items:center; border-radius:50%; color:#fff; background:linear-gradient(145deg,var(--pink),#ff9d78); font-weight:900; }
+    .channels { display:flex; flex-wrap:wrap; gap:9px; }
+    .channel { border:1px solid var(--line); background:var(--wash); border-radius:7px; padding:5px 12px; color:#4b4e54; }
+    .observer-strip { margin:20px 0 22px; display:flex; align-items:center; gap:14px; padding:13px 15px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 8px 30px rgba(20,22,30,.05); }
+    .observer-dot { width:9px; height:9px; border-radius:50%; background:var(--blue); box-shadow:0 0 0 5px rgba(0,174,236,.12); }
+    .observer-strip label { color:var(--soft); }
+    .observer-strip select { max-width:390px; border:0; outline:0; background:transparent; font-weight:700; color:var(--ink); cursor:pointer; }
+    .observer-hint { color:var(--soft); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .trace-button { margin-left:auto; border:1px solid var(--line); border-radius:8px; background:#fff; padding:7px 11px; color:var(--muted); cursor:pointer; white-space:nowrap; }
+    .trace-button.active { color:var(--pink-strong); border-color:#ffc0d2; background:#fff4f7; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; margin:0 0 16px; }
+    .section-head h2 { margin:0; font-size:24px; letter-spacing:-.5px; }
+    .section-head p { margin:0; color:var(--soft); }
+    .video-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:28px 16px; }
+    .video-card { min-width:0; cursor:pointer; border-radius:10px; outline:none; }
+    .video-card:focus-visible { box-shadow:0 0 0 3px rgba(0,174,236,.28); }
+    .thumb { position:relative; aspect-ratio:16/9; overflow:hidden; border-radius:9px; color:#fff; isolation:isolate; box-shadow:inset 0 0 0 1px rgba(0,0,0,.04); }
+    .thumb::before { content:""; position:absolute; width:68%; aspect-ratio:1; right:-18%; top:-46%; border:1px solid rgba(255,255,255,.25); border-radius:50%; box-shadow:0 0 0 26px rgba(255,255,255,.06),0 0 0 64px rgba(255,255,255,.04); }
+    .thumb::after { content:""; position:absolute; inset:auto 0 0; height:48%; background:linear-gradient(transparent,rgba(3,8,20,.74)); z-index:-1; }
+    .theme-0{background:linear-gradient(135deg,#4568dc,#6a55d7 56%,#c462d8)}
+    .theme-1{background:linear-gradient(135deg,#0575e6,#00b7c7 58%,#75d6ad)}
+    .theme-2{background:linear-gradient(135deg,#f05f57,#f89b4d 58%,#f6cf63)}
+    .theme-3{background:linear-gradient(135deg,#273c75,#487eb0 56%,#7f8fa6)}
+    .theme-4{background:linear-gradient(135deg,#b24592,#f15f79 58%,#f7a35c)}
+    .theme-5{background:linear-gradient(135deg,#0f9b8e,#1f5f70 58%,#283e51)}
+    .thumb-kicker { position:absolute; left:14px; top:12px; padding:3px 8px; border-radius:999px; background:rgba(7,10,18,.22); border:1px solid rgba(255,255,255,.25); font-size:11px; font-weight:700; backdrop-filter:blur(8px); }
+    .thumb-copy { position:absolute; left:15px; right:15px; top:50%; transform:translateY(-50%); max-height:3.51em; overflow:hidden; font-weight:900; font-size:clamp(15px,1.25vw,22px); line-height:1.17; letter-spacing:-.4px; text-wrap:balance; text-shadow:0 2px 14px rgba(0,0,0,.2); display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; }
+    .thumb-stats { position:absolute; left:13px; right:13px; bottom:9px; display:flex; gap:12px; font-size:11px; font-weight:650; }
+    .trace-badge { position:absolute; top:10px; right:10px; z-index:3; display:none; padding:4px 8px; border-radius:7px; background:var(--pink); font-weight:800; font-size:11px; box-shadow:0 5px 16px rgba(112,23,55,.25); }
+    .show-traces .trace-badge { display:block; }
+    .video-title { margin:10px 1px 5px; min-height:42px; font-size:15px; line-height:1.42; font-weight:600; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+    .video-card:hover .video-title { color:var(--blue-dark); }
+    .video-meta { display:flex; align-items:center; gap:7px; color:var(--soft); font-size:12px; min-width:0; }
+    .up-chip { width:19px; height:19px; display:grid; place-items:center; flex:0 0 auto; border:1px solid #b5bbc2; border-radius:5px; font-size:9px; font-weight:800; }
+    .video-meta span:last-child { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .empty { padding:60px 24px; text-align:center; color:var(--soft); border:1px dashed var(--line); border-radius:12px; }
+
+    /* Lab: cinematic observation surface, deliberately distinct from public UI. */
+    .lab-shell { min-height:calc(100vh - 64px); padding:34px 0 90px; color:var(--lab-ink); background:
+      radial-gradient(circle at 12% -8%,rgba(0,174,236,.16),transparent 31%),
+      radial-gradient(circle at 92% 5%,rgba(251,114,153,.13),transparent 25%),var(--night); }
+    .lab-wrap { width:min(1380px,calc(100% - 48px)); margin:0 auto; }
+    .lab-heading { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; margin-bottom:18px; }
+    .lab-heading small { color:#6fd7ff; font-weight:800; letter-spacing:.15em; }
+    .lab-heading h1 { margin:5px 0 0; font-size:30px; letter-spacing:-1px; }
+    .lab-heading p { max-width:580px; margin:0; color:var(--lab-muted); text-align:right; }
+    .lab-cinema { position:relative; min-height:630px; overflow:hidden; border:1px solid var(--night-line); border-radius:22px; background:
+      linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+      radial-gradient(circle at 80% 0,rgba(251,114,153,.1),transparent 30%),var(--night-2); background-size:38px 38px,38px 38px,auto,auto; box-shadow:0 34px 90px rgba(0,0,0,.35); }
+    .cinema-top { display:flex; justify-content:space-between; align-items:center; padding:21px 24px 0; color:var(--lab-muted); }
+    .live-mark { display:flex; align-items:center; gap:9px; font-size:12px; letter-spacing:.1em; }
+    .live-mark i { width:8px; height:8px; border-radius:50%; background:var(--pink); box-shadow:0 0 0 6px rgba(251,114,153,.12); }
+    .capture-button { border:1px solid var(--night-line); border-radius:9px; padding:7px 11px; color:var(--lab-muted); background:rgba(15,18,28,.68); cursor:pointer; }
+    .cinema-main { display:grid; grid-template-columns:minmax(0,1.3fr) minmax(360px,.7fr); gap:32px; padding:44px 54px 20px; }
+    .day-lockup { display:flex; align-items:end; gap:18px; }
+    .day-number { font-size:clamp(92px,10vw,154px); line-height:.73; font-weight:900; letter-spacing:-9px; font-variant-numeric:tabular-nums; background:linear-gradient(160deg,#fff 20%,#9cdcf4 58%,#fb8fad); -webkit-background-clip:text; color:transparent; }
+    .day-word { padding-bottom:5px; }
+    .day-word b { display:block; font-size:22px; }
+    .day-word span { color:var(--lab-muted); font-variant-numeric:tabular-nums; }
+    .moment { min-height:168px; padding-top:35px; max-width:720px; }
+    .moment small { color:var(--gold); font-weight:800; letter-spacing:.15em; }
+    .moment h2 { max-width:680px; margin:9px 0 9px; font-size:clamp(28px,3vw,46px); line-height:1.12; letter-spacing:-1.4px; text-wrap:balance; }
+    .moment p { max-width:610px; margin:0; color:var(--lab-muted); font-size:15px; }
+    .moment-dots { display:flex; gap:7px; margin-top:18px; }
+    .moment-dots button { width:24px; height:4px; border:0; border-radius:4px; background:#354057; cursor:pointer; padding:0; }
+    .moment-dots button.active { background:var(--pink); }
+    .pulse-panel { align-self:center; border:1px solid var(--night-line); border-radius:17px; padding:20px; background:rgba(9,11,18,.7); backdrop-filter:blur(12px); }
+    .pulse-panel h3 { margin:0 0 3px; font-size:12px; color:var(--lab-muted); letter-spacing:.13em; }
+    .pulse-primary { margin-bottom:17px; font-size:36px; font-weight:850; letter-spacing:-1px; }
+    .pulse-primary small { font-size:13px; font-weight:500; color:var(--lab-muted); letter-spacing:0; }
+    .pulse-list { display:grid; gap:13px; }
+    .pulse-row { display:grid; grid-template-columns:58px 1fr 45px; gap:10px; align-items:center; color:var(--lab-muted); font-size:12px; }
+    .pulse-track { height:7px; overflow:hidden; border-radius:9px; background:#252b3c; }
+    .pulse-track i { display:block; height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg,var(--blue),var(--pink)); transition:width .6s cubic-bezier(.2,.75,.25,1); }
+    .pulse-row strong { color:var(--lab-ink); text-align:right; font-variant-numeric:tabular-nums; }
+    .kpi-strip { display:grid; grid-template-columns:repeat(5,1fr); gap:1px; margin:24px 54px 20px; overflow:hidden; border:1px solid var(--night-line); border-radius:14px; background:var(--night-line); }
+    .lab-kpi { padding:15px 17px; background:rgba(14,18,28,.94); }
+    .lab-kpi span { display:block; color:var(--lab-muted); font-size:11px; }
+    .lab-kpi strong { display:block; margin-top:2px; font-size:22px; font-variant-numeric:tabular-nums; }
+    .lab-kpi em { color:#6fd7ff; font-size:11px; font-style:normal; }
+    .time-control { margin:10px 54px 32px; display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:17px; }
+    .play-button { width:42px; height:42px; border:1px solid #404961; border-radius:50%; color:#fff; background:#1b2232; cursor:pointer; font-size:16px; }
+    .time-rail { position:relative; height:42px; display:flex; align-items:center; }
+    .time-rail::before { content:""; position:absolute; left:0; right:0; top:20px; height:2px; background:#30384c; }
+    .time-range { position:relative; z-index:2; width:100%; accent-color:var(--pink); cursor:pointer; }
+    .time-label { min-width:96px; color:var(--lab-muted); text-align:right; font-variant-numeric:tabular-nums; }
+    .lab-grid { display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin-top:20px; }
+    .lab-panel { min-width:0; border:1px solid var(--night-line); border-radius:18px; padding:20px; background:rgba(17,21,33,.82); }
+    .lab-panel.wide { grid-column:1/-1; }
+    .panel-head { display:flex; justify-content:space-between; align-items:start; margin-bottom:18px; }
+    .panel-head h3 { margin:0 0 3px; font-size:17px; }
+    .panel-head p { margin:0; color:var(--lab-muted); font-size:12px; }
+    .panel-head b { color:#6fd7ff; font-size:11px; letter-spacing:.1em; }
+    .timeline-bars { height:190px; display:flex; align-items:flex-end; gap:7px; padding:16px 4px 25px; border-bottom:1px solid var(--night-line); }
+    .timeline-column { min-width:7px; flex:1; height:100%; display:flex; align-items:flex-end; justify-content:center; position:relative; }
+    .timeline-column i { width:min(24px,72%); min-height:3px; border-radius:6px 6px 2px 2px; background:#30394d; transition:height .55s ease,background .3s; }
+    .timeline-column.seen i { background:linear-gradient(180deg,#39c5f3,#5d7ce8); }
+    .timeline-column.current i { background:linear-gradient(180deg,var(--pink),#9b63df); box-shadow:0 0 20px rgba(251,114,153,.26); }
+    .timeline-column span { position:absolute; bottom:-23px; color:#69758c; font-size:9px; }
+    .category-list { display:grid; gap:12px; }
+    .category-row { display:grid; grid-template-columns:105px 1fr 70px; align-items:center; gap:10px; font-size:12px; }
+    .category-row span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .category-bar { height:8px; border-radius:8px; overflow:hidden; background:#252b3b; }
+    .category-bar i { display:block; height:100%; border-radius:inherit; background:linear-gradient(90deg,#00aeec,#66d3f8); transition:width .55s; }
+    .category-row strong { text-align:right; font-variant-numeric:tabular-nums; }
+    .rank-list { display:grid; gap:4px; }
+    .rank-row { display:grid; grid-template-columns:30px 1fr auto; gap:10px; align-items:center; padding:10px 8px; border-radius:10px; }
+    .rank-row:hover { background:rgba(255,255,255,.035); }
+    .rank-number { color:#6e7a91; font-size:18px; font-weight:900; font-variant-numeric:tabular-nums; }
+    .rank-row:nth-child(-n+3) .rank-number { color:var(--pink); }
+    .rank-title { min-width:0; }
+    .rank-title b { display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    .rank-title small { color:var(--lab-muted); }
+    .rank-value { color:#6fd7ff; font-variant-numeric:tabular-nums; }
+    .model-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; }
+    .model-card { padding:14px; border:1px solid var(--night-line); border-radius:12px; background:#121725; }
+    .model-card b { display:block; min-height:38px; font-size:12px; }
+    .model-card strong { display:block; font-size:24px; }
+    .model-card span { color:var(--lab-muted); font-size:11px; }
+    .cost-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
+    .cost-card { padding:15px; border:1px solid var(--night-line); border-radius:12px; background:#121725; }
+    .cost-card span { display:block; color:var(--lab-muted); font-size:11px; }
+    .cost-card strong { display:block; margin:4px 0; color:#eef4ff; font-size:21px; font-variant-numeric:tabular-nums; overflow-wrap:anywhere; }
+    .cost-card em { color:#6fd7ff; font-size:10px; font-style:normal; }
+    .note-carousel { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px; }
+    .strategy-note { min-height:170px; padding:16px; border:1px solid var(--night-line); border-radius:13px; background:#121725; }
+    .strategy-note small { color:#6fd7ff; }
+    .strategy-note blockquote { margin:12px 0 0; color:#d6dce7; font-size:13px; }
+    .source-note { margin-top:18px; color:#778298; font-size:11px; }
+
+    .modal { position:fixed; inset:0; z-index:100; display:none; place-items:center; padding:24px; background:rgba(10,12,18,.64); backdrop-filter:blur(8px); }
+    .modal.open { display:grid; }
+    .modal-card { width:min(920px,100%); max-height:min(760px,calc(100vh - 48px)); overflow:auto; border-radius:20px; background:#fff; box-shadow:0 30px 100px rgba(0,0,0,.3); }
+    .modal-cover { min-height:260px; padding:34px; display:flex; flex-direction:column; justify-content:flex-end; color:#fff; }
+    .modal-cover small { font-weight:800; letter-spacing:.1em; }
+    .modal-cover h2 { max-width:720px; margin:9px 0 0; font-size:34px; line-height:1.15; text-wrap:balance; }
+    .modal-body { padding:26px 34px 34px; }
+    .modal-topline { display:flex; gap:12px; color:var(--soft); }
+    .modal-body h3 { margin:25px 0 8px; }
+    .modal-body ol { padding-left:22px; }
+    .modal-actions { display:flex; gap:9px; margin-top:22px; }
+    .modal-actions span { padding:7px 11px; border-radius:8px; background:var(--wash); color:var(--muted); }
+    .modal-close { position:absolute; right:24px; top:20px; width:40px; height:40px; border:0; border-radius:50%; color:#fff; background:rgba(0,0,0,.35); cursor:pointer; font-size:20px; }
+
+    body.capture .topbar,body.capture .lab-heading,body.capture .lab-grid,body.capture .source-note,body.capture .capture-button { display:none; }
+    body.capture .lab-shell { min-height:100vh; padding:0; display:grid; place-items:center; }
+    body.capture .lab-wrap { width:100%; }
+    body.capture .lab-cinema { width:100vw; height:100vh; min-height:0; border:0; border-radius:0; display:flex; flex-direction:column; justify-content:center; }
+    body.capture .cinema-main { padding-top:2vh; }
+
+    @media (max-width:1050px) {
+      .main-nav { display:none; } .video-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+      .cinema-main{grid-template-columns:1fr;padding:32px 34px 14px}.pulse-panel{display:none}.kpi-strip,.time-control{margin-left:34px;margin-right:34px}
+      .model-grid{grid-template-columns:repeat(2,1fr)}.cost-grid{grid-template-columns:repeat(3,1fr)}.note-carousel{grid-template-columns:1fr 1fr}.lab-cinema{min-height:590px}
+    }
+    @media (max-width:720px) {
+      .topbar{padding:0 14px;height:58px}.logo{font-size:18px}.logo-mark{width:30px;height:26px}.global-day{display:none}.view-tab{padding:7px 10px}
+      .world-view{min-height:calc(100vh - 58px)}.home-hero{height:170px}.hero-inner,.public-wrap,.lab-wrap{width:min(100% - 28px,1380px)}.hero-copy h1{font-size:34px}.hero-day-art b{font-size:54px}
+      .video-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 10px}.thumb-copy{font-size:13px;left:10px;right:10px}.thumb-kicker{left:9px;top:8px}.thumb-stats{left:9px;right:9px;gap:7px;font-size:9px}.observer-strip{align-items:flex-start;flex-wrap:wrap}.observer-hint{width:100%;order:3}.trace-button{margin-left:0}.channel-row{align-items:flex-start}.channel-orb{display:none}
+      .lab-shell{padding-top:20px}.lab-heading{display:block}.lab-heading p{text-align:left;margin-top:8px}.lab-cinema{min-height:610px;border-radius:16px}.cinema-main{padding:35px 20px 10px}.day-number{font-size:94px}.moment{padding-top:27px}.moment h2{font-size:29px}.kpi-strip{grid-template-columns:repeat(2,1fr);margin:18px 20px}.lab-kpi:last-child{grid-column:1/-1}.time-control{margin:10px 20px 24px}.lab-grid{grid-template-columns:1fr}.note-carousel{grid-template-columns:1fr}.model-grid{grid-template-columns:1fr 1fr}.cost-grid{grid-template-columns:1fr 1fr}.lab-panel.wide{grid-column:auto}.modal-cover{min-height:220px;padding:25px}.modal-cover h2{font-size:26px}.modal-body{padding:22px}
+    }
+    @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; transition:none!important; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><span class="logo-mark">AI</span><span><em>Aili</em>Aili</span></div>
+    <nav class="main-nav" aria-label="站点导航"><span>首页</span><span>热门</span><span>分区</span><span>UP 主</span></nav>
+    <div class="view-tabs" role="tablist" aria-label="观察模式">
+      <button class="view-tab active" data-view="home" role="tab">逛首页</button>
+      <button class="view-tab" data-view="lab" role="tab">看演化</button>
+    </div>
+    <div class="global-day"><strong id="global-day">Day —</strong> · <span id="global-date">—</span></div>
+  </header>
+
+  <main id="home-view" class="world-view home-shell">
+    <section class="home-hero">
+      <div class="hero-grid"></div>
+      <div class="hero-inner">
+        <div class="hero-copy"><small>AI CONTENT ECOLOGY</small><h1>AiliAili</h1><p id="hero-line">一个正在自己生长的 AI 内容社区</p></div>
+        <div class="hero-day-art"><b id="home-day-number">—</b><span>DAY</span></div>
+      </div>
+    </section>
+    <div class="public-wrap">
+      <section class="channel-row"><div class="channel-orb">动态</div><div class="channels" id="channels"></div></section>
+      <section class="observer-strip">
+        <i class="observer-dot"></i><label for="feed-select">正在还原</label><select id="feed-select"></select>
+        <span class="observer-hint" id="feed-hint"></span>
+        <button class="trace-button" id="random-feed-button">换一个当天首页</button>
+        <button class="trace-button" id="trace-button">显示本次行为</button>
+      </section>
+      <div class="section-head"><div><h2>首页推荐</h2><p>来自该日真实记录的一次首页会话</p></div><p id="home-count"></p></div>
+      <section class="video-grid" id="video-grid"></section>
+    </div>
+  </main>
+
+  <main id="lab-view" class="world-view lab-shell" hidden>
+    <div class="lab-wrap">
+      <header class="lab-heading"><div><small>AILIAILI LAB</small><h1>世界演化播放器</h1></div><p>所有变化来自已完成日期的真实模拟事实。系统只标记线索，不替这个世界编剧情。</p></header>
+      <section class="lab-cinema" id="lab-cinema">
+        <div class="cinema-top"><div class="live-mark"><i></i><span>WORLD RECORD · {{ run_id }}</span></div><button class="capture-button" id="capture-button">画面模式 · F</button></div>
+        <div class="cinema-main">
+          <div>
+            <div class="day-lockup"><div class="day-number" id="lab-day-number">—</div><div class="day-word"><b>模拟日</b><span id="lab-date">—</span></div></div>
+            <article class="moment"><small id="moment-eyebrow">等待世界启动</small><h2 id="moment-title">尚无已完成日期</h2><p id="moment-detail"></p><div class="moment-dots" id="moment-dots"></div></article>
+          </div>
+          <aside class="pulse-panel"><h3>TODAY'S PULSE</h3><div class="pulse-primary"><span id="pulse-ctr">—</span> <small>CTR</small></div><div class="pulse-list" id="pulse-list"></div></aside>
+        </div>
+        <div class="kpi-strip" id="kpi-strip"></div>
+        <div class="time-control"><button class="play-button" id="play-button" aria-label="播放时间">▶</button><div class="time-rail"><input class="time-range" id="time-range" type="range" min="0" max="0" value="0" aria-label="模拟日期"></div><div class="time-label" id="time-label">Day — / —</div></div>
+      </section>
+
+      <section class="lab-grid">
+        <article class="lab-panel"><div class="panel-head"><div><h3>平台脉搏</h3><p>已发生日期的每日点击；尚未走到的日期不剧透</p></div><b>TIME</b></div><div class="timeline-bars" id="timeline-bars"></div></article>
+        <article class="lab-panel"><div class="panel-head"><div><h3>分区流量</h3><p>当日曝光与点击，不把视频数量误当热度</p></div><b>SECTIONS</b></div><div class="category-list" id="category-list"></div></article>
+        <article class="lab-panel"><div class="panel-head"><div><h3>此刻热门</h3><p>截至所选日期的累计点击排序</p></div><b>TOP VIDEOS</b></div><div class="rank-list" id="video-ranks"></div></article>
+        <article class="lab-panel"><div class="panel-head"><div><h3>UP 主走势</h3><p>谁正在获得观众；不是预设冠军</p></div><b>CREATORS</b></div><div class="rank-list" id="creator-ranks"></div></article>
+        <article class="lab-panel wide"><div class="panel-head"><div><h3>同一个世界里的模型创作者</h3><p>只用于观察自然差异，不宣称模型能力排行榜</p></div><b>MODEL × PERSONA</b></div><div class="model-grid" id="model-grid"></div></article>
+        <article class="lab-panel wide"><div class="panel-head"><div><h3>模型调用与费用</h3><p>{% if parent_run_id %}仅统计本分支新增调用；母世界 Day 0—{{ parent_day }} 账本仍在父档案{% else %}截至所选完成日的累计账本；Provider 实报与本地估算严格分开{% endif %}</p></div><b>TOKENS & COST</b></div><div class="cost-grid" id="cost-grid"></div></article>
+        <article class="lab-panel wide"><div class="panel-head"><div><h3>UP 主当时怎么想</h3><p>发布时保存的短记忆，可用于还原后来发生的转向与误判</p></div><b>CREATOR NOTES</b></div><div class="note-carousel" id="strategy-notes"></div></article>
+      </section>
+      <p class="source-note">数据源：完成日数据库事实 · 首页为真实会话抽样 · 自动线索不是人工剧情 · 模型标签仅在 Lab 中出现{% if parent_run_id %} · 非正史分支自 {{ parent_run_id }} / Day {{ parent_day }} 延伸{% endif %}</p>
+    </div>
+  </main>
+
+  <div class="modal" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <button class="modal-close" id="modal-close" aria-label="关闭">×</button><article class="modal-card" id="modal-card"></article>
+  </div>
+
+  <script id="world-data" type="application/json">{{ experience | tojson }}</script>
+  <script>
+    (() => {
+      "use strict";
+      const WORLD = JSON.parse(document.getElementById("world-data").textContent);
+      const days = WORLD.days || [];
+      const videos = WORLD.video_catalog || {};
+      const creators = WORLD.creator_catalog || {};
+      const modelNames = {
+        ling_3_flash_novita:"Ling 3.0 Flash", qwen_3_7_flash:"Qwen 3.7 Flash",
+        gpt_5_6_luna:"GPT-5.6 Luna", deepseek_v4_flash_0731:"DeepSeek V4 Flash",
+        sonnet_5:"Sonnet 5", hy3:"Tencent Hy3", seed_2_0_lite:"Seed 2.0 Lite",
+        doubao_seed_2_1_turbo:"Doubao Seed 2.1 Turbo"
+      };
+      const state = { dayIndex:Math.max(0,days.length - 1), view:"home", feedIndex:0, momentIndex:0, playing:false, timer:null, traces:false };
+      const $ = id => document.getElementById(id);
+      const esc = value => String(value ?? "").replace(/[&<>'"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[c]));
+      const pct = value => `${(Number(value || 0) * 100).toFixed(1)}%`;
+      const num = value => Number(value || 0).toLocaleString("zh-CN");
+      const money = rows => (rows || []).length ? rows.map(row => {
+        const symbol = row.currency === "USD" ? "$" : row.currency === "CNY" ? "¥" : `${row.currency} `;
+        return `${symbol}${Number(row.amount || 0).toFixed(4)}`;
+      }).join(" + ") : "—";
+      const current = () => days[state.dayIndex] || null;
+      const theme = video => `theme-${Number(video?.cover_seed || 0) % 6}`;
+      const publicDate = iso => iso ? `${iso.slice(5,7)}月${iso.slice(8,10)}日` : "—";
+
+      function setView(view, updateHash=true) {
+        state.view = view === "lab" ? "lab" : "home";
+        $("home-view").hidden = state.view !== "home";
+        $("lab-view").hidden = state.view !== "lab";
+        document.querySelectorAll(".view-tab").forEach(button => button.classList.toggle("active",button.dataset.view === state.view));
+        if (updateHash) writeHash();
+      }
+      function setDay(index, updateHash=true) {
+        if (!days.length) return;
+        state.dayIndex = Math.max(0,Math.min(days.length - 1,Number(index)));
+        state.feedIndex = 0; state.momentIndex = 0;
+        render();
+        if (updateHash) writeHash();
+      }
+      function writeHash() {
+        const day = current()?.day || 0;
+        history.replaceState(null,"",`#${state.view}/day/${day}`);
+      }
+      function readHash() {
+        const match = location.hash.match(/^#(home|lab)\/day\/(\d+)/);
+        if (!match) return;
+        state.view = match[1];
+        const index = days.findIndex(day => day.day === Number(match[2]));
+        if (index >= 0) state.dayIndex = index;
+      }
+
+      function videoCard(item, day) {
+        const video = videos[item.video_id]; if (!video) return "";
+        const metric = day.video_metrics[item.video_id] || {};
+        const action = item.clicked ? (item.triple ? "该观众三连" : item.follow ? "该观众关注" : "该观众点开") : "未点击";
+        return `<article class="video-card" tabindex="0" data-video="${esc(item.video_id)}">
+          <div class="thumb ${theme(video)}"><span class="thumb-kicker">${esc(video.category)}</span><div class="thumb-copy">${esc(video.title)}</div><div class="thumb-stats"><span>曝光 ${num(metric.impressions)}</span><span>点击 ${num(metric.clicks)}</span><span>CTR ${pct(metric.ctr)}</span></div><span class="trace-badge">${esc(action)}</span></div>
+          <div class="video-title">${esc(video.title)}</div><div class="video-meta"><span class="up-chip">UP</span><span>${esc(video.creator)} · Day ${video.published_day}</span></div>
+        </article>`;
+      }
+      function renderHome(day) {
+        if (!day) { $("video-grid").innerHTML='<div class="empty">世界还没有完成第一天。</div>'; return; }
+        $("home-day-number").textContent = day.day;
+        const lead = day.top_video_ids.map(id => videos[id]).find(Boolean);
+        $("hero-line").textContent = lead ? `今天，${lead.creator} 的投稿正在被看见` : "一个正在自己生长的 AI 内容社区";
+        $("channels").innerHTML = day.categories.map(row => `<span class="channel">${esc(row.category)} · ${row.videos}</span>`).join("");
+        const select = $("feed-select");
+        select.innerHTML = day.feeds.map((feed,index) => `<option value="${index}">${esc(feed.viewer)} · ${esc(feed.interest)}</option>`).join("");
+        if (state.feedIndex >= day.feeds.length) state.feedIndex = 0;
+        select.value = String(state.feedIndex);
+        const feed = day.feeds[state.feedIndex];
+        if (!feed) { $("feed-hint").textContent="当天没有可展示的成功首页会话"; $("video-grid").innerHTML='<div class="empty">当天没有成功首页样本。</div>'; return; }
+        $("feed-hint").textContent = `${feed.visit_mode} · 此刻想要「${feed.need}」 · 实际点击 ${feed.click_count} 条`;
+        $("home-count").textContent = `${feed.candidates.length} 条逻辑曝光`;
+        $("video-grid").classList.toggle("show-traces",state.traces);
+        $("video-grid").innerHTML = feed.candidates.map(item => videoCard(item,day)).join("");
+        $("trace-button").classList.toggle("active",state.traces);
+        $("trace-button").textContent = state.traces ? "隐藏本次行为" : "显示本次行为";
+      }
+      function renderMoment(day) {
+        const moments = day?.moments || [];
+        if (!moments.length) return;
+        state.momentIndex = Math.min(state.momentIndex,moments.length - 1);
+        const moment = moments[state.momentIndex];
+        $("moment-eyebrow").textContent = moment.eyebrow;
+        $("moment-title").textContent = moment.title;
+        $("moment-detail").textContent = moment.detail;
+        $("moment-dots").innerHTML = moments.map((_,index) => `<button class="${index===state.momentIndex?'active':''}" data-moment="${index}" aria-label="线索 ${index+1}"></button>`).join("");
+      }
+      function renderPulse(day) {
+        $("pulse-ctr").textContent = pct(day.daily.ctr);
+        const rows = [["曝光",day.daily.impressions],["点击",day.daily.clicks],["关注",day.daily.new_follows],["三连",day.daily.triples]];
+        const max = Math.max(1,...rows.map(row => row[1]));
+        $("pulse-list").innerHTML = rows.map(([label,value]) => `<div class="pulse-row"><span>${label}</span><div class="pulse-track"><i style="width:${Math.max(value ? 5 : 0,value/max*100)}%"></i></div><strong>${num(value)}</strong></div>`).join("");
+      }
+      function renderKpis(day) {
+        const items = [
+          ["今日新投稿",day.daily.videos,`累计 ${num(day.cumulative.videos)}`],
+          ["首页会话",day.daily.viewer_sessions,`累计 ${num(day.cumulative.viewer_sessions)}`],
+          ["逻辑曝光",day.daily.impressions,`累计 ${num(day.cumulative.impressions)}`],
+          ["点击",day.daily.clicks,`累计 ${num(day.cumulative.clicks)}`],
+          ["关注 / 三连",`${day.daily.new_follows} / ${day.daily.triples}`,`累计 ${day.cumulative.new_follows} / ${day.cumulative.triples}`]
+        ];
+        $("kpi-strip").innerHTML = items.map(([label,value,context]) => `<div class="lab-kpi"><span>${label}</span><strong>${typeof value==='number'?num(value):esc(value)}</strong><em>${esc(context)}</em></div>`).join("");
+      }
+      function renderTimeline(day) {
+        const visible = days.slice(0,state.dayIndex + 1);
+        const max = Math.max(1,...visible.map(item => item.daily.clicks));
+        $("timeline-bars").innerHTML = days.map((item,index) => {
+          const seen=index<=state.dayIndex, height=seen?Math.max(item.daily.clicks?5:2,item.daily.clicks/max*100):2;
+          return `<button class="timeline-column ${seen?'seen':''} ${index===state.dayIndex?'current':''}" data-day-index="${index}" aria-label="Day ${item.day}" style="border:0;background:none;padding:0"><i style="height:${height}%"></i><span>${days.length<=15?'D'+item.day:(index%5===0?'D'+item.day:'')}</span></button>`;
+        }).join("");
+      }
+      function renderCategories(day) {
+        const rows=day.categories.slice(0,8), max=Math.max(1,...rows.map(row=>row.daily_impressions));
+        $("category-list").innerHTML = rows.map(row => `<div class="category-row"><span>${esc(row.category)}</span><div class="category-bar"><i style="width:${row.daily_impressions/max*100}%"></i></div><strong>${num(row.daily_impressions)} / ${num(row.daily_clicks)}</strong></div>`).join("");
+      }
+      function renderRanks(day) {
+        $("video-ranks").innerHTML = day.top_video_ids.slice(0,6).map((id,index) => { const v=videos[id],m=day.video_metrics[id]||{}; return `<div class="rank-row" data-open-video="${esc(id)}"><span class="rank-number">${String(index+1).padStart(2,'0')}</span><div class="rank-title"><b>${esc(v.title)}</b><small>${esc(v.creator)} · ${esc(v.category)}</small></div><span class="rank-value">${num(m.clicks)} 点击</span></div>`; }).join("");
+        $("creator-ranks").innerHTML = day.top_creator_ids.slice(0,6).map((id,index) => { const c=creators[id],m=day.creator_metrics[id]||{}; return `<div class="rank-row"><span class="rank-number">${String(index+1).padStart(2,'0')}</span><div class="rank-title"><b>${esc(c.name)}</b><small>${esc(c.category)} · ${m.video_count||0} 期</small></div><span class="rank-value">${num(m.clicks)} 点击</span></div>`; }).join("");
+      }
+      function renderModels(day) {
+        $("model-grid").innerHTML = day.creator_models.map(row => `<div class="model-card"><b>${esc(modelNames[row.model_alias]||row.model_alias)}</b><strong>${pct(row.ctr)}</strong><span>${num(row.videos)} 期 · ${num(row.clicks)} 点击 · ${num(row.new_follows)} 关注</span></div>`).join("");
+      }
+      function renderCosts(day) {
+        const llm=day.llm_cumulative||{};
+        const items=[
+          ["逻辑调用 / 尝试",`${num(llm.logical_calls)} / ${num(llm.attempts)}`,`成功 ${num(llm.succeeded_calls)} · 失败尝试 ${num(llm.failed_attempts)}`],
+          ["输入 Tokens",num(llm.input_tokens),`缓存命中 ${num(llm.cached_input_tokens)}`],
+          ["输出 / 推理 Tokens",`${num(llm.output_tokens)} / ${num(llm.reasoning_tokens)}`,"推理 Token 已包含在 Provider 用量口径中"],
+          ["Provider 实报",money(llm.provider_cost_by_currency),`${num(llm.provider_reported_attempts)} 次有账单回传`],
+          ["本地估算",money(llm.estimated_cost_by_currency),`${num(llm.unreported_cost_attempts)} 次无钱包费用回传`]
+        ];
+        $("cost-grid").innerHTML=items.map(([label,value,detail])=>`<div class="cost-card"><span>${esc(label)}</span><strong>${esc(value)}</strong><em>${esc(detail)}</em></div>`).join("");
+      }
+      function renderNotes(day) {
+        const notes=day.strategy_notes.slice(0,6);
+        $("strategy-notes").innerHTML = notes.length ? notes.map(note => `<article class="strategy-note"><small>${esc(note.creator)} · ${esc(note.category)}</small><blockquote>“${esc(note.note)}”</blockquote>${note.expected_reception ? `<small>投稿前预期：${esc(note.expected_reception)}${note.prediction_reason ? ` · ${esc(note.prediction_reason)}` : ''}</small>` : ''}</article>`).join("") : '<div class="empty">今天没有成功保存的 Creator Turn。</div>';
+      }
+      function renderLab(day) {
+        if (!day) return;
+        $("lab-day-number").textContent=day.day; $("lab-date").textContent=publicDate(day.date);
+        renderMoment(day); renderPulse(day); renderKpis(day); renderTimeline(day); renderCategories(day); renderRanks(day); renderModels(day); renderCosts(day); renderNotes(day);
+        $("time-range").max=String(Math.max(0,days.length-1)); $("time-range").value=String(state.dayIndex); $("time-label").textContent=`Day ${day.day} / ${days.length}`;
+        $("play-button").textContent=state.playing?"❚❚":"▶";
+      }
+      function render() {
+        const day=current();
+        $("global-day").textContent=day?`Day ${day.day}`:"Day —"; $("global-date").textContent=day?publicDate(day.date):"—";
+        renderHome(day); renderLab(day); window.__AILIAILI_READY__=true;
+      }
+      function showVideo(videoId) {
+        const day=current(), video=videos[videoId]; if(!day||!video)return;
+        const metric=day.video_metrics[videoId]||{};
+        $("modal-card").innerHTML=`<div class="modal-cover ${theme(video)}"><small>${esc(video.category)} · Day ${video.published_day}</small><h2 id="modal-title">${esc(video.title)}</h2></div><div class="modal-body"><div class="modal-topline"><span>UP 主 ${esc(video.creator)}</span><span>·</span><span>${num(metric.impressions)} 曝光</span><span>·</span><span>${num(metric.clicks)} 点击</span><span>·</span><span>CTR ${pct(metric.ctr)}</span></div><h3>这期到底讲什么</h3><p>${esc(video.premise)}</p><h3>极简内容框架</h3><ol>${(video.outline||[]).map(item=>`<li>${esc(item)}</li>`).join("")}</ol><div class="modal-actions"><span>新增关注 ${num(metric.new_follows)}</span><span>三连 ${num(metric.triples)}</span><span>${video.grounding_mode==='declared_fiction'?'明确虚构设定':'模拟内容框架'}</span></div></div>`;
+        $("video-modal").classList.add("open");
+      }
+      function closeVideo(){ $("video-modal").classList.remove("open"); }
+      function togglePlay(){
+        if(state.playing){clearInterval(state.timer);state.playing=false;renderLab(current());return;}
+        if(state.dayIndex>=days.length-1)setDay(0);
+        state.playing=true;renderLab(current());
+        state.timer=setInterval(()=>{ if(state.dayIndex>=days.length-1){clearInterval(state.timer);state.playing=false;renderLab(current());return;} setDay(state.dayIndex+1); },2200);
+      }
+      function toggleCapture(){ document.body.classList.toggle("capture"); }
+
+      document.querySelectorAll(".view-tab").forEach(button=>button.addEventListener("click",()=>setView(button.dataset.view)));
+      $("feed-select").addEventListener("change",event=>{state.feedIndex=Number(event.target.value);renderHome(current());});
+      $("random-feed-button").addEventListener("click",()=>{
+        const day=current(); if(!day?.feeds?.length)return;
+        state.feedIndex=day.feeds.length===1?0:(state.feedIndex+1+Math.floor(Math.random()*(day.feeds.length-1)))%day.feeds.length;
+        renderHome(day);
+      });
+      $("trace-button").addEventListener("click",()=>{state.traces=!state.traces;renderHome(current());});
+      $("time-range").addEventListener("input",event=>setDay(Number(event.target.value)));
+      $("play-button").addEventListener("click",togglePlay); $("capture-button").addEventListener("click",toggleCapture);
+      $("moment-dots").addEventListener("click",event=>{const button=event.target.closest("[data-moment]");if(button){state.momentIndex=Number(button.dataset.moment);renderMoment(current());}});
+      $("timeline-bars").addEventListener("click",event=>{const button=event.target.closest("[data-day-index]");if(button)setDay(Number(button.dataset.dayIndex));});
+      document.addEventListener("click",event=>{const card=event.target.closest("[data-video], [data-open-video]");if(card)showVideo(card.dataset.video||card.dataset.openVideo);});
+      document.addEventListener("keydown",event=>{
+        if(event.key==="Escape"){closeVideo();document.body.classList.remove("capture");return;}
+        if(event.target.matches("select,input"))return;
+        if(event.key==="ArrowLeft")setDay(state.dayIndex-1); if(event.key==="ArrowRight")setDay(state.dayIndex+1);
+        if(event.key.toLowerCase()==="f")toggleCapture(); if(event.code==="Space"){event.preventDefault();togglePlay();}
+        if(event.key==="Enter"&&event.target.matches("[data-video]"))showVideo(event.target.dataset.video);
+      });
+      $("modal-close").addEventListener("click",closeVideo); $("video-modal").addEventListener("click",event=>{if(event.target===$("video-modal"))closeVideo();});
+      window.addEventListener("hashchange",()=>{readHash();setView(state.view,false);render();});
+      readHash(); setView(state.view,false); render();
+    })();
+  </script>
+</body>
+</html>

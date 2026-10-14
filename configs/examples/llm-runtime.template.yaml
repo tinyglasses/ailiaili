@@ -1,0 +1,29 @@
+# Intentionally incomplete: null prices fail validation before any model call.
+# Fill in a currently available model ID, its price and capabilities yourself.
+models:
+  my_model:
+    provider: openrouter
+    endpoint: https://openrouter.ai/api/v1/chat/completions
+    model_id: REPLACE_WITH_MODEL_ID
+    api_key_env: AILIAILI_MODEL_API_KEY
+    supports_json_mode: true
+    allow_provider_fallbacks: false
+    max_in_flight: 1
+    request_start_interval_ms: 1000
+    request_start_batch_size: 1
+    creator_max_output_tokens: 2048
+    pricing:
+      currency: USD
+      input_per_million: null
+      cached_input_per_million: null
+      output_per_million: null
+budget:
+  hard_limit: 0.10
+  max_cost_per_call: 0.02
+  max_attempts_per_call: 1
+  timeout_seconds: 60
+reasoning:
+  creator_turn: false
+  population_homepage: false
+  population_post_click: false
+  reference_viewer: false

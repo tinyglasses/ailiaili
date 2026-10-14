@@ -1,0 +1,86 @@
+run_id: ailiaili-formal-v1.2-100c-60d
+seed: 20260812
+world_anchor_date: '2026-08-12'
+days: 60
+execution_mode: llm
+max_concurrency: 200
+request_start_interval_ms: 100
+request_start_batch_size: 5
+viewer_early_fraction: 0.75
+viewer_tail_gate_seconds: 600
+viewer_tail_recheck_seconds: 60
+viewer_tail_completion_ratio: 0.99
+creator_count: 100
+creator_persona_path: configs/reference/creators.yaml
+creator_model_aliases:
+- ling_3_flash_novita
+- qwen_3_7_flash
+- deepseek_v4_flash_0731
+- gpt_5_6_luna
+- sonnet_5
+- hy3
+- doubao_seed_2_1_turbo
+creator_model_weights:
+  ling_3_flash_novita: 18
+  qwen_3_7_flash: 23
+  deepseek_v4_flash_0731: 13
+  gpt_5_6_luna: 8
+  sonnet_5: 1
+  hy3: 13
+  doubao_seed_2_1_turbo: 10
+creator_model_assignment: mirrored_weighted
+publish_interval_days: 3
+initial_videos_per_creator: 1
+viewer_count: 2035
+random_visitor_count: 500
+viewer_persona_path: configs/reference/viewers.yaml
+viewer_model_aliases:
+- ling_3_flash_novita
+- qwen_3_7_flash
+- deepseek_v4_flash_0731
+- gpt_5_6_luna
+- hy3
+- seed_2_0_lite
+viewer_model_weights:
+  ling_3_flash_novita: 0.35
+  qwen_3_7_flash: 0.35
+  deepseek_v4_flash_0731: 0.1
+  gpt_5_6_luna: 0.1
+  hy3: 0.05
+  seed_2_0_lite: 0.05
+reference_viewer_model_aliases:
+- ling_3_flash_novita
+- qwen_3_7_flash
+- deepseek_v4_flash_0731
+- gpt_5_6_luna
+- sonnet_5
+- hy3
+- seed_2_0_lite
+reference_viewer_persona_count: 5
+reference_viewer_constellation_ids:
+- ai_models_products
+- game_world_characters
+- food_local_family
+- daily_vlog_companion
+- comedy_variety_internet
+viewer_note_mode: brief
+random_visitor_note_sample_rate: 0.03
+follow_activation_open_to_more: 0.005
+follow_activation_actively_seek: 0.08
+triple_activation_notable: 0.003
+triple_activation_exceptional: 0.12
+homepage_size: 40
+max_clicks: 3
+cold_impression_target: 100
+exploit_ratio: 0.6
+cold_ratio: 0.2
+explore_ratio: 0.2
+max_videos_per_creator: 2
+age_half_life_days: 14
+interest_slots_max: 4
+following_slots_max: 4
+overall_success_rate: 0.8
+cohort_model_success_rate: 0.8
+cohort_model_gate_min_tasks: 5
+llm_runtime_path: configs/reference/models.yaml
+output_root: runs

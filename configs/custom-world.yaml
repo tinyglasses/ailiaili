@@ -1,0 +1,38 @@
+# 只改这一份文件即可创建自己的小世界。先用 stub 跑通，不调用模型。
+run_id: my-world
+mode: stub                  # llm 才会真正调用下面配置的模型
+days: 5
+seed: 42
+categories: [怪谈, 日常史诗]    # 自己命名；作者和观众填写的分区必须在这里
+
+creators:
+  - name: 夜班便利店
+    category: 怪谈
+    personality: 一本正经，胆子很小，遇到怪事先看劳动合同
+    goal: 把便利店值夜班写成有生活气的怪谈
+    topics: [夜班冰柜自己加班, 收银台后面的陌生工牌]
+  - name: 洗衣房史官
+    category: 日常史诗
+    personality: 庄严认真，擅长把普通小事讲得惊天动地
+    goal: 把洗衣做饭这些小事写成英雄故事
+    topics: [找回失踪的袜子, 最后一件没晾干的衬衫]
+    # model: another_model  # 可按账号指定不同模型别名
+
+viewers:
+  count: 6
+  interests: [怪谈, 日常史诗]
+  personality: 喜欢有画面的小故事，讨厌反复说教
+  # model: another_model    # 观众也可以单独选模型
+
+publish_every: 2            # 每位作者隔几天发布；人数由 creators 自动计算
+model: main                # 作者和观众的默认模型；stub 不会调用它
+models:
+  main:
+    provider: openrouter    # 也支持 volcengine_ark、openai_compatible
+    model_id: REPLACE_WITH_MODEL_ID
+    api_key_env: AILIAILI_MODEL_API_KEY   # 只写变量名，不写密钥
+    input_per_million: null  # llm 前填写自己的供应商当前价格
+    output_per_million: null
+budget:
+  hard_limit: 0.10          # 默认 USD；与模型价格币种一致
+  max_cost_per_call: 0.02

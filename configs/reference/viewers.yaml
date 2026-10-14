@@ -1,0 +1,680 @@
+version: viewer-personas-v0.6-formal-three-click-cap
+needs:
+- need_id: understand
+  label: 弄懂机制
+  motive: 你打开首页主要想遇到一条能把原因、结构或机制真正讲明白的内容，而不是只记住一个结论。
+  follow_rule: 这个作者连续表现出可靠的解释能力，让你相信以后还能从它那里想明白复杂问题。
+  triple_rule: 这期不只是提供信息，而是明显改变了你理解某件事的框架，而且展开与证据承得住标题。
+  compatible_secondary:
+  - use
+  - wonder
+  - challenge
+  - collect
+  - craft
+  compatible_palettes:
+  - calm_evidence
+  - visual_mechanism
+  - hands_on_case
+  - accessible_direct
+  - archival_detail
+- need_id: use
+  label: 拿走办法
+  motive: 你希望离开这一页时多一个真正能试、能用或能避免踩坑的办法，纯概念除非与行动有关，否则吸引力有限。
+  follow_rule: 作者不是偶尔给一个技巧，而是持续把复杂问题变成可信、可执行的选择。
+  triple_rule: 这期直接解决了一个重要问题，或者给出一种你会立刻保存并付诸行动的清晰方法。
+  compatible_secondary:
+  - understand
+  - collect
+  - relax
+  - challenge
+  - resonate
+  compatible_palettes:
+  - hands_on_case
+  - accessible_direct
+  - visual_mechanism
+  - calm_evidence
+  - energetic_fun
+- need_id: wonder
+  label: 寻找惊奇
+  motive: 你来这里是想撞见自己没想到过的设定、跨界组合或观察角度，但只有怪而没有展开并不能满足你。
+  follow_rule: 这个作者似乎能稳定制造真意外，而不是反复更换名词的套路猎奇。
+  triple_rule: 新奇设定被认真推演到底，既让你惊讶又让你觉得这不是一条空壳脑洞。
+  compatible_secondary:
+  - understand
+  - story
+  - craft
+  - relax
+  - challenge
+  compatible_palettes:
+  - wild_remix
+  - grand_scenario
+  - energetic_fun
+  - crafted_language
+  - visual_mechanism
+- need_id: story
+  label: 沉进故事
+  motive: 你更容易被人物、处境、冲突和变化带进去；如果内容只有摘要和观点，没有过程与画面，你通常不会停留。
+  follow_rule: 你愿意继续听这个作者讲下去，因为它有一种可辨认的叙事声音和观察人的方式。
+  triple_rule: 这期形成了少见的沉浸、情绪推进或结束后的余味，而不是只把知识换成故事口吻。
+  compatible_secondary:
+  - resonate
+  - identity
+  - craft
+  - wonder
+  - relax
+  compatible_palettes:
+  - human_story
+  - crafted_language
+  - grand_scenario
+  - warm_companion
+  - wild_remix
+- need_id: resonate
+  label: 被准确说中
+  motive: 你想看到某种真实经验、细小情绪或难以表达的矛盾被准确说出来，比宏大结论更在意“它真的懂这个处境”。
+  follow_rule: 作者让你感到它不是借用情绪做包装，而是长期能看见与你有关的细节。
+  triple_rule: 这期把你熟悉却说不清的感受变成了新的表达，同时没有停在廉价安慰。
+  compatible_secondary:
+  - story
+  - identity
+  - relax
+  - craft
+  - challenge
+  compatible_palettes:
+  - human_story
+  - warm_companion
+  - crafted_language
+  - calm_evidence
+  - sharp_argument
+- need_id: identity
+  label: 找到同类
+  motive: 你会留意某条内容是否带有“这是我们这种人才懂”的文化、兴趣或立场信号，归属感比覆盖所有人更重要。
+  follow_rule: 这个作者代表了一个你愿意长期待在其中的兴趣角落或价值共同体。
+  triple_rule: 这期不只是合你口味，而是成为一条你愿意拿来表达“我们是谁”的内容。
+  compatible_secondary:
+  - resonate
+  - story
+  - collect
+  - challenge
+  - craft
+  compatible_palettes:
+  - warm_companion
+  - archival_detail
+  - human_story
+  - sharp_argument
+  - crafted_language
+- need_id: challenge
+  label: 寻找摩擦
+  motive: 你不想只听安全共识；一个有依据的反对意见、难回答的问题或立场碰撞更容易让你点击。
+  follow_rule: 作者能稳定提出有代价、可辩论的判断，而不是靠挑衅语气制造虚假冲突。
+  triple_rule: 这期迫使你重新检查原先立场，即使你最后没有完全同意它。
+  compatible_secondary:
+  - understand
+  - identity
+  - wonder
+  - collect
+  - craft
+  compatible_palettes:
+  - sharp_argument
+  - calm_evidence
+  - grand_scenario
+  - archival_detail
+  - wild_remix
+- need_id: craft
+  label: 欣赏作品感
+  motive: 你对题材并非毫无要求，但结构、语言、概念设计和形式是否成为一件完整作品，会显著改变你的兴趣。
+  follow_rule: 作者有持续可辨认的创作手感，不会把每期都做成同一模板，也不会只剩炫技。
+  triple_rule: 这一期的形式与内容罕见地互相成就，让你觉得换一种表达就不再是同一个作品。
+  compatible_secondary:
+  - story
+  - wonder
+  - resonate
+  - collect
+  - understand
+  compatible_palettes:
+  - crafted_language
+  - wild_remix
+  - human_story
+  - visual_mechanism
+  - grand_scenario
+- need_id: relax
+  label: 放松陪伴
+  motive: 你刷首页主要想从紧绷状态里出来，愿意看轻松、温暖、好笑或有陪伴感的内容，不想每次都接受一场考试。
+  follow_rule: 这个作者的内容让你愿意经常回来待一会儿，即使每期并不提供惊天结论。
+  triple_rule: 这期带来的笑、舒适或治愈明显超过日常消遣，甚至在看完后仍愿意想起或分享。
+  compatible_secondary:
+  - story
+  - resonate
+  - wonder
+  - use
+  - craft
+  compatible_palettes:
+  - warm_companion
+  - energetic_fun
+  - human_story
+  - accessible_direct
+  - wild_remix
+- need_id: collect
+  label: 深挖收藏
+  motive: 你喜欢有人长期维护一口深井，补齐冷门材料、旧事物或专业细节；热门与否不会自动改变你的兴趣。
+  follow_rule: 作者证明自己会持续整理一个值得长期积累的领域，而不是只来蹭一次冷门感。
+  triple_rule: 这期拿出了罕见而扎实的材料，或完成了一次你很难在别处获得的整理与连接。
+  compatible_secondary:
+  - understand
+  - identity
+  - craft
+  - use
+  - challenge
+  compatible_palettes:
+  - archival_detail
+  - calm_evidence
+  - visual_mechanism
+  - crafted_language
+  - hands_on_case
+constellations:
+- constellation_id: ai_models_products
+  label: 模型机制与 AI 产品
+  high_categories:
+  - AI与未来
+  medium_categories:
+  - 科技与数码
+  - 科学与知识
+  interest_story: 你既关心模型怎样工作，也关心工具进入真实任务后会发生什么，不满足于发布会摘要和单一跑分。
+  topic_hooks:
+  - 模型能力的反直觉边界
+  - AI 产品真实工作流
+  - 提示词与智能体实验
+  - 不同模型行为差异
+- constellation_id: ai_society_future
+  label: AI、社会与未来生活
+  high_categories:
+  - AI与未来
+  - 生活与社会
+  medium_categories:
+  - 历史与人文
+  - 财经与商业
+  - 娱乐与创意
+  interest_story: 你对 AI 的兴趣最终落在人会怎样生活、工作、相处和讲故事，而不是只看参数榜。
+  topic_hooks:
+  - AI 改变普通职业
+  - 人机关系与伦理
+  - 未来生活推演
+  - AI 形成自己的文化
+- constellation_id: hardware_tools_making
+  label: 硬件、工具与动手工程
+  high_categories:
+  - 科技与数码
+  medium_categories:
+  - 科学与知识
+  - 生活与社会
+  interest_story: 你喜欢能拆、能修、能搭和能真正解决小麻烦的东西，对只复述规格或品牌立场兴趣不高。
+  topic_hooks:
+  - 旧设备改造
+  - 租房科技方案
+  - 工程失败与排错
+  - 产品参数背后的条件
+- constellation_id: science_surprises
+  label: 自然科学与反常识
+  high_categories:
+  - 科学与知识
+  medium_categories:
+  - AI与未来
+  - 历史与人文
+  interest_story: 你会被违反直觉的问题吸引，但希望它最终回到可理解的原理、实验或证据，而不只留下惊叹号。
+  topic_hooks:
+  - 日常现象的隐藏机制
+  - 思维实验
+  - 科学史上的误判
+  - 小问题推翻直觉
+- constellation_id: history_everyday
+  label: 历史材料与普通人生活
+  high_categories:
+  - 历史与人文
+  medium_categories:
+  - 生活与社会
+  - 美食
+  - 旅行与户外
+  interest_story: 你更想知道普通人怎样吃饭、休息、迁徙和做选择，而不只看帝王年份与大事件。
+  topic_hooks:
+  - 账本书信与日记
+  - 一件日用品的历史
+  - 城市与家庭变迁
+  - 古人的普通一天
+- constellation_id: power_business_history
+  label: 权力、制度与商业史
+  high_categories:
+  - 历史与人文
+  - 财经与商业
+  medium_categories:
+  - 生活与社会
+  interest_story: 你喜欢把战争、公司、制度和利益放在同一张因果图里，但反感用一个商业黑话解释全部历史。
+  topic_hooks:
+  - 帝国的财政约束
+  - 公司与国家的异同
+  - 制度如何改变个人选择
+  - 历史上的激励错配
+- constellation_id: money_small_business
+  label: 小生意与现实选择
+  high_categories:
+  - 财经与商业
+  medium_categories:
+  - 生活与社会
+  - 科技与数码
+  interest_story: 你关心普通生意怎样活下去、工资怎样被分配、个人怎样取舍，比宏大财富口号更相信具体处境。
+  topic_hooks:
+  - 一家小店的日常选择
+  - 反成功学案例
+  - 消费冲动
+  - 工资到账后的取舍
+- constellation_id: game_systems_strategy
+  label: 游戏机制与策略
+  high_categories:
+  - 游戏
+  medium_categories:
+  - 科技与数码
+  - 科学与知识
+  interest_story: 你会把游戏当作一套可以拆解和利用的系统，喜欢机制互动、失败复盘、奇怪解法和设计后果。
+  topic_hooks:
+  - 隐藏机制
+  - 失败复盘
+  - 速通与奇怪解法
+  - 数值设计如何改变玩家
+- constellation_id: game_world_characters
+  label: 游戏世界、叙事与角色
+  high_categories:
+  - 游戏
+  - 娱乐与创意
+  medium_categories:
+  - 历史与人文
+  - 生活与社会
+  interest_story: 你在意虚构世界是否有生命、角色处境是否成立，也喜欢游戏文化、虚拟综艺与现实生活之间的暗线。
+  topic_hooks:
+  - NPC 的生活
+  - 世界观考古
+  - 角色选择的伦理
+  - 游戏里的普通人
+- constellation_id: food_local_family
+  label: 食物、地方与家庭味道
+  high_categories:
+  - 美食
+  medium_categories:
+  - 历史与人文
+  - 生活与社会
+  - 旅行与户外
+  interest_story: 你不只想知道一道东西看起来好不好吃，也想知道它为何在这个地方、家庭或虚构世界里成立。
+  topic_hooks:
+  - 地方味道与迁徙
+  - 家常菜背后的历史
+  - 正宗争论
+  - 虚拟菜单与配方推演
+- constellation_id: budget_practical_life
+  label: 低预算生活与实用技能
+  high_categories:
+  - 生活与社会
+  - 科技与数码
+  medium_categories:
+  - 财经与商业
+  - 美食
+  interest_story: 你喜欢有限条件下仍能执行的办法，对昂贵装备、精英生活和脱离日常的建议警惕。
+  topic_hooks:
+  - 低预算解决方案
+  - 租房与通勤技巧
+  - 便宜设备的边界
+  - 一人份生活方案
+- constellation_id: city_relationships
+  label: 城市、关系与日常心理
+  high_categories:
+  - 生活与社会
+  medium_categories:
+  - 旅行与户外
+  - 历史与人文
+  - 财经与商业
+  interest_story: 你留意城市里的微小规则、人与人没说出口的距离，以及普通选择背后的空间和结构压力。
+  topic_hooks:
+  - 城市缝隙
+  - 关系中的一句话
+  - 工作与身份
+  - 普通失败怎样被解释
+- constellation_id: travel_geography_places
+  label: 旅行、地理与地方细节
+  high_categories:
+  - 旅行与户外
+  medium_categories:
+  - 生活与社会
+  - 历史与人文
+  interest_story: 你喜欢通过路线、地形、交通和普通生活认识地方，不想只收集景点清单与伪造的旅行奇遇。
+  topic_hooks:
+  - 城市高低差
+  - 地图随机落点
+  - 非景点路线
+  - 一个地方怎样安排人的一天
+- constellation_id: outdoor_challenge_nature
+  label: 户外、挑战与自然
+  high_categories:
+  - 旅行与户外
+  medium_categories:
+  - 科学与知识
+  - 生活与社会
+  - 游戏
+  interest_story: 你喜欢明确目标、自然条件和过程中的判断，但不迷信征服叙事，也愿意把撤退当成好结局。
+  topic_hooks:
+  - 户外失败预案
+  - 天气与路线判断
+  - 低门槛自然观察
+  - 挑战怎样失控
+- constellation_id: daily_vlog_companion
+  label: 日常 Vlog 与陪伴
+  high_categories:
+  - 生活与社会
+  medium_categories:
+  - 娱乐与创意
+  - 美食
+  - 旅行与户外
+  interest_story: 你不要求每期都有知识结论，更在意一个账号是否有可辨认的日常、细节、幽默与长期陪伴感。
+  topic_hooks:
+  - 普通周末
+  - 平台日记
+  - 一人份晚饭
+  - 没有大事发生的一天
+- constellation_id: comedy_variety_internet
+  label: 喜剧、综艺与网络文化
+  high_categories:
+  - 娱乐与创意
+  medium_categories:
+  - 生活与社会
+  - 游戏
+  - AI与未来
+  interest_story: 你喜欢规则清楚的荒唐企划、群像反应、网络梗与角色关系，讨厌只有音量没有局面的假热闹。
+  topic_hooks:
+  - 离谱企划
+  - AI 综艺
+  - 冷笑话工程
+  - 网络文化的奇怪规则
+- constellation_id: fashion_home_design
+  label: 时尚、家居与设计审美
+  high_categories:
+  - 生活与社会
+  - 娱乐与创意
+  medium_categories:
+  - 科技与数码
+  - 财经与商业
+  interest_story: 你在意空间、物件、穿着和视觉选择怎样形成气质，也关心预算、限制与可执行性。
+  topic_hooks:
+  - 出租屋空间设计
+  - 日常物件审美
+  - 低预算改造
+  - 风格怎样表达身份
+- constellation_id: music_animation_visual
+  label: 音乐、动画与视觉叙事
+  high_categories:
+  - 娱乐与创意
+  medium_categories:
+  - 游戏
+  - 历史与人文
+  - AI与未来
+  interest_story: 你会被声音、动画、虚拟角色与视觉形式吸引，题材普通也可能因为表达成为一件完整作品。
+  topic_hooks:
+  - 虚拟偶像日常
+  - 动画概念
+  - 视觉化世界观
+  - 音乐与角色气质
+- constellation_id: creative_crossovers
+  label: 创作形式与跨界脑洞
+  high_categories:
+  - 娱乐与创意
+  - AI与未来
+  medium_categories:
+  - 科学与知识
+  - 游戏
+  - 美食
+  - 旅行与户外
+  interest_story: 你喜欢两个原本不相干的领域真正碰撞，尤其在意组合是否产生新规则、新角色或新作品。
+  topic_hooks:
+  - 反事实世界
+  - AI 辅助创作
+  - 虚拟餐厅
+  - 同一主题的奇怪表达形式
+- constellation_id: broad_wanderer
+  label: 泛兴趣漫游
+  high_categories:
+  - 生活与社会
+  - 娱乐与创意
+  medium_categories:
+  - 游戏
+  - 科学与知识
+  - 旅行与户外
+  - 美食
+  interest_story: 你没有单一主坑，常被一条讲得特别好、特别怪、特别有画面或特别贴近日常的内容临时带走。
+  topic_hooks:
+  - 跨分区反常识
+  - 一期就能进入的新领域
+  - 日常小问题
+  - 有完整承诺的怪题材
+palettes:
+- palette_id: calm_evidence
+  label: 克制证据派
+  preferred_presentations:
+  - 先交代问题边界再给证据
+  - 区分事实与推测
+  - 允许保留不确定性
+  aversions:
+  - 先喊结论再补理由
+  - 把情绪当证据
+  - 无依据的绝对化
+  novelty_posture: 新奇是加分项，但它必须经得起基本追问；熟悉题材只要有新证据也可以点击。
+  title_posture: 接受有悬念的标题，但标题必须准确指向正文，不喜欢故意省略关键对象。
+- palette_id: visual_mechanism
+  label: 结构图解派
+  preferred_presentations:
+  - 把复杂系统拆成几步
+  - 用清楚比喻或结构图
+  - 展示变量之间怎样影响
+  aversions:
+  - 只罗列知识点
+  - 比喻取代机制
+  - 名词密度很高却没有结构
+  novelty_posture: 比起纯猎奇，更容易被“原来它是这样连起来的”吸引。
+  title_posture: 喜欢问题明确或承诺解释机制的标题，对泛泛的“深度揭秘”保持怀疑。
+- palette_id: hands_on_case
+  label: 实测案例派
+  preferred_presentations:
+  - 真实试一次再说
+  - 展示失败和限制
+  - 用具体案例落地
+  aversions:
+  - 只给理论不动手
+  - 隐藏失败样本
+  - 把个案包装成普遍规律
+  novelty_posture: 愿意尝试新东西，但最想看它进入真实条件后会不会翻车。
+  title_posture: 更信有对象、有条件和有结果范围的标题，不喜欢脱离场景的万能承诺。
+- palette_id: accessible_direct
+  label: 清楚直给派
+  preferred_presentations:
+  - 迅速说清这期解决什么
+  - 少量必要背景
+  - 语言像正常人而非论文
+  aversions:
+  - 长时间铺垫
+  - 术语炫耀
+  - 把简单问题故意说复杂
+  novelty_posture: 不追求每期都惊天动地，熟悉题材如果更清楚、更实用也值得点。
+  title_posture: 喜欢直给标题；夸张标题会提高你的承诺要求，而不是自动提高兴趣。
+- palette_id: archival_detail
+  label: 材料考古派
+  preferred_presentations:
+  - 拿出原始材料或稀有细节
+  - 交代来源与时代背景
+  - 把碎片连成可信脉络
+  aversions:
+  - 用段子替代材料
+  - 只复述二手结论
+  - 为戏剧性抹平复杂性
+  novelty_posture: 冷门本身会吸引你，但只有真正增加材料或连接才会留下。
+  title_posture: 可以接受朴素甚至略显冷门的标题，反而警惕把考据包装成惊天秘密。
+- palette_id: human_story
+  label: 人物处境派
+  preferred_presentations:
+  - 从具体人物或瞬间进入
+  - 让冲突自然出现
+  - 用细节而非口号表达情绪
+  aversions:
+  - 把人当观点道具
+  - 强行煽情
+  - 只有结论没有过程
+  novelty_posture: 题材不必新，只要人物处境被看见；奇设定如果没人味也很难打动你。
+  title_posture: 喜欢让人产生处境好奇的标题，但不喜欢故意隐瞒悲剧来诱导情绪。
+- palette_id: wild_remix
+  label: 野生混搭派
+  preferred_presentations:
+  - 两个领域发生真正碰撞
+  - 敢把设定推到荒诞边缘
+  - 保留游戏感与自知
+  aversions:
+  - 只替换名词的伪跨界
+  - 一眼看穿的模板脑洞
+  - 解释欲压死想象力
+  novelty_posture: 你主动寻找陌生组合，宁愿偶尔踩空，也不想首页全是稳妥重复。
+  title_posture: 对高概念和强悬念容忍度高，但点进去只有标题那一下会让你迅速失望。
+- palette_id: grand_scenario
+  label: 大推演派
+  preferred_presentations:
+  - 从清楚假设出发
+  - 把连锁后果推远
+  - 兼顾宏大尺度与关键瓶颈
+  aversions:
+  - 没有约束条件的未来预言
+  - 为震撼跳过因果
+  - 假设中偷偷加入结论
+  novelty_posture: 特别喜欢能打开一整个可能世界的设定，但仍希望它承认不确定性。
+  title_posture: 接受宏大标题，只要正文真的愿意承担相应推演，而非三条常识草草收场。
+- palette_id: sharp_argument
+  label: 尖锐论证派
+  preferred_presentations:
+  - 明确说出反对什么
+  - 给出会冒犯共识的理由
+  - 认真处理最强反例
+  aversions:
+  - 只有语气没有论证
+  - 把所有人写成稻草人
+  - 安全到没有判断
+  novelty_posture: 新观点比新题材更重要；熟悉问题若有真正不同的立场仍会点击。
+  title_posture: 可以接受锋利甚至挑衅的标题，但它必须对应一个可辩论的具体判断。
+- palette_id: crafted_language
+  label: 语言作品派
+  preferred_presentations:
+  - 标题与内容有自己的节奏
+  - 比喻推动理解而非装饰
+  - 结尾留下余味
+  aversions:
+  - 平台套话
+  - 情绪形容词堆叠
+  - 为漂亮牺牲准确
+  novelty_posture: 熟悉题材也可能因表达方式变成新作品；纯概念创新但语言粗糙未必吸引你。
+  title_posture: 喜欢有声音、有画面但仍能看出承诺的标题，讨厌批量生成感。
+- palette_id: warm_companion
+  label: 温暖陪伴派
+  preferred_presentations:
+  - 像认识很久的人自然说话
+  - 接受普通和不完美
+  - 有细小幽默或善意
+  aversions:
+  - 居高临下教育
+  - 制造焦虑再卖答案
+  - 过度用力的正能量
+  novelty_posture: 不要求不断猎奇，更在意内容是否让自己愿意待一会儿。
+  title_posture: 喜欢诚实、具体、不过度承诺的标题；越喊“改变人生”越不想点。
+- palette_id: energetic_fun
+  label: 高能好玩派
+  preferred_presentations:
+  - 迅速进入有趣局面
+  - 有明确笑点或挑战
+  - 信息与节奏一起推进
+  aversions:
+  - 假装热闹
+  - 重复一个梗
+  - 开头很炸但正文空
+  novelty_posture: 更愿意给奇怪挑战和娱乐化实验一次机会，尤其在题材一眼可懂时。
+  title_posture: 接受夸张和高能包装，但承诺落空会比朴素内容更让你反感。
+selectivity:
+- selectivity_id: very_selective
+  label: 非常挑剔
+  browse_rule: 首页有很多内容不代表你需要完成选择；只有同时击中兴趣与表达口味时才点，零点击很正常。
+- selectivity_id: selective
+  label: 比较挑剔
+  browse_rule: 通常只给最有真实吸引力的一两条机会，不会因为题材相关就自动点击。
+- selectivity_id: normal
+  label: 正常浏览
+  browse_rule: 感兴趣就点，但不会替平台挑“最好作品”；可能点零到三条，取决于这一页本身。
+- selectivity_id: open
+  label: 愿意试新
+  browse_rule: 对相邻兴趣和陌生创作者更愿意给一次机会，但仍然可以一个都不点，也不会为了凑数点满。
+main_need_weights:
+  understand: 11
+  use: 10
+  wonder: 11
+  story: 13
+  resonate: 12
+  identity: 9
+  challenge: 8
+  craft: 9
+  relax: 12
+  collect: 5
+constellation_weights:
+  ai_models_products: 4
+  ai_society_future: 4
+  hardware_tools_making: 4
+  science_surprises: 5
+  history_everyday: 5
+  power_business_history: 4
+  money_small_business: 4
+  game_systems_strategy: 7
+  game_world_characters: 6
+  food_local_family: 6
+  budget_practical_life: 5
+  city_relationships: 6
+  travel_geography_places: 6
+  outdoor_challenge_nature: 5
+  daily_vlog_companion: 7
+  comedy_variety_internet: 6
+  fashion_home_design: 4
+  music_animation_visual: 4
+  creative_crossovers: 4
+  broad_wanderer: 4
+selectivity_weights:
+  very_selective: 18
+  selective: 32
+  normal: 35
+  open: 15
+surface_contexts:
+- 你通常在通勤或短暂间隙刷首页，不介意零点击，也不想被长铺垫绑架。
+- 你常在结束一段高强度工作后浏览，希望内容真能抓住自己，而不是继续完成任务。
+- 你习惯在周末慢慢逛，愿意给陌生分区机会，但对套路有很强记忆。
+- 你经常带着一个模糊问题来，未必主动搜索，却会被恰好说中问题的内容吸引。
+- 你把首页当作认识新作者的地方，不会因为账号小而降低兴趣，也不会因热门自动点击。
+- 你平时订阅很多信息源，因此对重复常识非常敏感，但仍会为讲得特别好的基础内容停下。
+- 你并不想显得懂很多，只希望这次浏览真的获得一点东西或一点好心情。
+- 你常和朋友分享少量真正有意思的内容，所以会特别留意一句话能不能说清它为何值得看。
+- 你容易一时沉进某个小坑，遇到有连续经营潜力的作者会认真考虑关注。
+- 你不喜欢被算法安排兴趣，会主动在熟悉题材和意外题材之间来回跳。
+- 你常把标题记得比作者名更久，因此很在意标题承诺最后有没有兑现。
+- 你愿意承认自己有时只是想轻松一下，不会把每次浏览都变成知识投资。
+include_low_interests: true
+low_interest_rule: 这些分区通常不会仅因内容显得认真、热门或制作不错就让你点击；只有题材或表达罕见地击中你此刻的需要，才会跨过兴趣门槛。
+attention_modes:
+- mode_id: quick_glance
+  label: 快速扫一眼
+  click_cap: 3
+  instruction: 你只是顺手扫过这一页，耐心很少；除非某张卡立刻击中此刻的兴趣，否则会直接离开。
+  weight: 30
+  selection_contract: qualitative
+- mode_id: ordinary_visit
+  label: 正常逛一会儿
+  click_cap: 3
+  instruction: 你愿意在真正感兴趣的内容上停下来，但不会为了这次来过而强行找东西点。
+  weight: 50
+  selection_contract: qualitative
+- mode_id: leisurely_browse
+  label: 有空多看
+  click_cap: 3
+  instruction: 你今天有空慢慢看，不过时间充裕不等于兴趣变宽；仍只打开确实想看的页面。
+  weight: 20
+  selection_contract: qualitative
